@@ -1,0 +1,38 @@
+fn = function(z)                                             
+{
+  a = '"';
+  fn2(z);
+  if (z instanceof Object) a = a.substring(a, a.length-1);
+  a+=('"'); 
+  console.log(a);
+}
+
+fn2 = function(z)
+{
+  if (Array.isArray(z)) 
+  {
+    a+=('[');
+    for (let j in z)
+    {
+      if (z[j] instanceof Object) fn2(z[j]);
+      else a+=(z[j] + ',');
+    }
+    a = a.substring(a, a.length-1);
+    a+='],';
+  }
+  else if (z instanceof Object)
+  {
+    a+=('{');
+    for (let key in z)
+    {
+      a+=('"' + key + '":');
+      if (z[key] instanceof Object) fn2(z[key]);
+      else if (typeof(z[key]) == 'number') a+=(z[key] + ',');
+      else a+=('"' + z[key] + '",'); 
+    }
+    a = a.substring(a, a.length-1);
+    a+='},';
+  }
+  else if (typeof(z) == 'number') a+=(z);
+  else a+=('"' + z + '"'); 
+}
