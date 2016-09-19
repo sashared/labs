@@ -2,7 +2,7 @@ fn = function(z)
 {
   a = '"';
   fn2(z);
-  if (z instanceof Object) a = a.substring(a, a.length-1);
+  a = a.substring(a, a.length-1);
   a+=('"'); 
   console.log(a);
 }
@@ -33,6 +33,6 @@ fn2 = function(z)
     a = a.substring(a, a.length-1);
     a+='},';
   }
-  else if (typeof(z) == 'number') a+=(z);
-  else a+=('"' + z + '"'); 
+  else if (typeof(z) == 'number') a+=(z + ',');
+  else a+=('"' + z + '",'); 
 }
