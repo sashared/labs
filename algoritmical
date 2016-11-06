@@ -1,23 +1,17 @@
-function myjson(z)
-{
+function myjson(z){
   let a = '';
-  function fn2(z)
-  {
-    if (Array.isArray(z)) 
-    {
+  function fn2(z){
+    if (Array.isArray(z)){
       a+=('[');
-      for (let j in z)
-      {
+      for (let j in z){
         if (z[j] instanceof Object) fn2(z[j]);
         else a+=(z[j] + ',');
       }
       a = a.substring(a, a.length-1) + '],';
     }
-    else if (z instanceof Object)   
-    {
+    else if (z instanceof Object){
       a+=('{');
-      for (let key in z)
-      {
+      for (let key in z){
         a+=('"' + key + '":');
         if (z[key] instanceof Object) fn2(z[key]);
         else if (typeof(z[key]) === 'number') a+=(z[key] + ',');
