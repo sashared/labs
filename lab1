@@ -1,0 +1,216 @@
+'use strict';
+let colors = ["красный","синий","зелёный","жёлтый","белый",
+"черный","оранжевый","розовый","фиолетовый","коричневый",
+"голубой","бежевый","малиновый","серый","пурпурный",
+"синевато-зелёный","жемчужно-белый","салатовый","Зелёный Мичиганского государственного университета","золотистый",
+"кирпично-красный","коралловый","лимонно-жёлтый","розовато-лиловый","индиго"];
+
+console.log("Початковий масив:\n\n" + colors + "\n");
+console.log("-------------------------------------------------\n");
+
+function FilterDefis(a){
+  if (a.search('-') != -1) return (false);
+  else return (true);
+}
+
+colors = colors.filter(FilterDefis)
+
+console.log("Масив без слiв, що мiстять дефiс:\n\n" + colors + "\n")
+console.log("-------------------------------------------------\n");
+
+function Vowelquantity(a,b){
+  let q1 = 0;
+  let q2 = 0;
+  for (let i = 0; i < a.length; ++i){
+    switch (a[i]){
+      case 'у':
+      case 'е':
+      case 'о':
+      case 'э':
+      case 'а':
+      case 'ы':
+      case 'и':
+      case 'ю':
+      case 'я':
+      case 'ё':
+        ++q1;
+        break;      
+    }
+  }
+    for (let i = 0; i < b.length; ++i){
+    switch (b[i]){
+      case 'у':
+      case 'е':
+      case 'о':
+      case 'э':
+      case 'а':
+      case 'ы':
+      case 'и':
+      case 'ю':
+      case 'я':
+      case 'ё':
+        ++q2;
+        break;      
+    }
+  }
+	return q1 - q2;
+}
+
+colors = colors.sort(Vowelquantity);
+
+console.log("Масив, вiдсортований за кiлькiстю голосних лiтер:\n\n" + colors + "\n");
+console.log("-------------------------------------------------\n");
+
+function FrequencyOfSymbols(a){
+  let arr = [];
+  let isThere = false;
+  for (let i = 0; i < a.length; ++i){
+    isThere = false;
+    for (let j = 0; j < arr.length; j = j + 2){
+       if (a[i] === ' '){
+         isThere = true;
+         break;
+       }
+       if (arr[j] === a[i]){
+         ++arr[j+1];
+         isThere = true;
+         break;
+       }
+    }
+    if (!isThere) arr.push(a[i],1);
+  }
+  arr = arr.map((elem,i) => i%2 === 0 ? elem+=':' : elem+='; ');
+  arr[arr.length - 1] = arr[arr.length - 1].substring(0,arr[arr.length - 1].length - 2);        
+  return JSON.stringify(arr).replace(/(")|(,)/g,'');
+}
+
+console.log("Масив частот символiв:")
+
+for(let i = 0; i < colors.length; ++i){
+  console.log('\n' + colors[i]);
+  console.log(FrequencyOfSymbols(colors[i]));
+}
+
+function DivideBySyllables(a){
+  let arr = [];
+  let o = -1;
+  let empty = true;
+  let words = a.split(' ');
+  words.forEach((word) => {
+    ++o;
+      arr.push;
+      arr[o] = '';
+    for (let i = 0; i < word.length; ++i){
+      arr[o] += word[i];
+      if ((((word[i]=='у') || (word[i]=='е') || (word[i]=='э') || (word[i]=='о') || (word[i]=='а') || (word[i]=='ы') 
+         || (word[i]=='я') || (word[i]=='и') || (word[i]=='ю') || (word[i]=='ё')) 
+      && ((word[i+1]=='у') || (word[i+1]=='е') || (word[i+1]=='э') || (word[i+1]=='о') || (word[i+1]=='а') 
+         || (word[i+1]=='ы') || (word[i+1]=='я') || (word[i+1]=='и') || (word[i+1]=='ю') || (word[i+1]=='ё')) || (i === word.length - 1))
+          // гласная | гласная
+          
+    ||   (((word[i]!=='у') && (word[i]!=='е') && (word[i]!=='э') && (word[i]!=='о') && (word[i]!=='а') && (word[i]!=='ы') 
+         && (word[i]!=='я') && (word[i]!=='и') && (word[i]!=='ю') && (word[i]!=='ё')) 
+      && ((word[i-1]=='у') || (word[i-1]=='е') || (word[i-1]=='э') || (word[i-1]=='о') || (word[i-1]=='а') 
+         || (word[i-1]=='ы') || (word[i-1]=='я') || (word[i-1]=='и') || (word[i-1]=='ю') || (word[i-1]=='ё')) 
+      && ((word[i+1]!=='у') && (word[i+1]!=='е') && (word[i+1]!=='э') && (word[i+1]!=='о') && (word[i+1]!=='а') 
+         && (word[i+1]!=='ы') && (word[i+1]!=='я') && (word[i+1]!=='и') && (word[i+1]!=='ю') && (word[i+1]!=='ё'))) 
+          // гласная + согласная | согласная 
+          
+    ||   (((word[i]=='у') || (word[i]=='е') || (word[i]=='э') || (word[i]=='о') || (word[i]=='а') || (word[i]=='ы') 
+         || (word[i]=='я') || (word[i]=='и') || (word[i]=='ю') || (word[i]=='ё'))
+      && ((word[i+1]!=='у') && (word[i+1]!=='е') && (word[i+1]!=='э') && (word[i+1]!=='о') && (word[i+1]!=='а') 
+         && (word[i+1]!=='ы') && (word[i+1]!=='я') && (word[i+1]!=='и') && (word[i+1]!=='ю') && (word[i+1]!=='ё')) 
+      && ((word[i+2]=='у') || (word[i+2]=='е') || (word[i+2]=='э') || (word[i+2]=='о') || (word[i+2]=='а') || (word[i+2]=='ы') 
+         || (word[i+2]=='я') || (word[i+2]=='и') || (word[i+2]=='ю') || (word[i+2]=='ё'))))
+        // гласная | согласная + гласная 
+          {
+        ++o;
+        arr.push;
+        arr[o] = '';
+        empty = true;
+       // console.log('слог  ' + arr[o-1]);
+      } 
+      else empty = false;
+    }
+    let del = true;
+    if (empty) o = o - 1;
+    else {
+      for (let i = 0; i < arr[o].length; ++i){
+        if ((arr[o][i]=='у') || (arr[o][i]=='е') || (arr[o][i]=='э') || (arr[o][i]=='о') || (arr[o][i]=='а') || (arr[o][i]=='ы') 
+           || (arr[o][i]=='я') || (arr[o][i]=='и') || (arr[o][i]=='ю') || (arr[o][i]=='ё')) del = false;
+      }
+      if (del){
+        arr[o-1] += arr[o--];
+      }
+    }
+   // console.dir(arr);
+
+  });
+  return arr.splice(0,arr.length - 1);
+  
+}
+
+console.log("\n-------------------------------------------------\n");
+console.log("Масив складiв:")
+
+colors.forEach((x) => {
+  console.log("\n" + x);
+  console.log(DivideBySyllables(x));
+});
+
+/*function Hashing(a){
+
+}
+
+console.log("\n-------------------------------------------------\n");
+console.log("Хешування")*/
+
+colors.forEach(x => {
+  let a = Hashing(x);
+  console.log(a);
+ });
+
+function Encryption(a, key){
+  let temp = '';
+  let sp2 = '@'.charCodeAt(0);
+  let key3 = key || 'о';
+  let key2 = key3.charCodeAt(0);
+  
+  while (a.length % 4 != 3) a += ' ';
+  let l = a.length;
+  for (let i = 0; i < l; ++i) temp += a[i*4%l];
+  
+  let temp2 = '';
+  for (let i = 0; i < a.length; ++i){
+    temp2 += String.fromCharCode(((temp.charCodeAt(i))^key2++)^sp2);
+  }
+  
+  return temp2;
+}
+
+function DeEncryption(a, key){
+  let l = a.length;
+  let n = Math.ceil(l/4);
+  let sp2 = '@'.charCodeAt(0);
+  let key3 = key || 'о';
+  let key2 = key3.charCodeAt(0);
+  
+  let temp2 = '';
+  for (let i = 0; i < a.length; ++i){
+    temp2 += String.fromCharCode(((a.charCodeAt(i))^key2++)^sp2);
+  }
+  
+  let temp = '';
+  for (let i = 0; i < a.length; ++i) temp += temp2[i*n%l];
+  while (temp[temp.length] === ' ') temp[temp.length = '\0'];
+  return temp;
+}
+
+console.log("\n-------------------------------------------------\n");
+console.log("Шифрування:\n")
+
+colors.forEach(x => {
+  let a = Encryption(x);
+  console.log(a);
+  console.log(DeEncryption(a));
+});
