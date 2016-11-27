@@ -5,41 +5,7 @@ function FilterDefis(a) {
 }
 
 function Vowelquantity(a, b) {
-  let q1 = 0;
-  let q2 = 0;
-  for (let i = 0; i < a.length; ++i){
-    switch (a[i]){
-      case 'у':
-      case 'е':
-      case 'о':
-      case 'э':
-      case 'а':
-      case 'ы':
-      case 'и':
-      case 'ю':
-      case 'я':
-      case 'ё':
-        ++q1;
-        break;      
-    }
-  }
-    for (let i = 0; i < b.length; ++i){
-    switch (b[i]){
-      case 'у':
-      case 'е':
-      case 'о':
-      case 'э':
-      case 'а':
-      case 'ы':
-      case 'и':
-      case 'ю':
-      case 'я':
-      case 'ё':
-        ++q2;
-        break;      
-    }
-  }
-  return q1 - q2;
+  return a.split(/е|у|о|а|ы|я|и|ю|ё|э/g).length - b.split(/е|у|о|а|ы|я|и|ю|ё|э/g).length;
 }
 
 function FrequencyOfSymbols(a){
