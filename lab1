@@ -85,6 +85,8 @@ function DivideBySyllables(a){
   return JSON.stringify(arr.splice(0,arr.length - 1)).replace(/(')|(")/g,'');
 }
 
+function Hashing(a){  while (a.length % 4 != 0) a += ' ';  a += 'соль'  let s = ['щ','у','к','а']  for (let i = 0; i < 4; ++i){    s[i] = s[i].charCodeAt(0);    for (let j = 0; j < a.length / 4; ++j){      s[i] = s[i]^a.charCodeAt(4*j+i);    }  }  return ((s[0]<<24) + (s[1]<<16) + (s[2]<<8) + s[3])}
+
 function Encryption(a, key){
   let temp = '';
   let sp2 = '@'.charCodeAt(0);
@@ -154,6 +156,8 @@ colors.forEach((x) => {
   console.log("\n" + x);
   console.log(DivideBySyllables(x));
 });
+
+console.log('\n-------------------------------------------------\n');console.log('Хешування:')let hash = [];colors.forEach(x => {  let a = Hashing(x);  console.log('\n' + x)  console.log(a);  hash.push(a);});console.log('\n-------------------------------------------------\n');console.log('Пошук по хешу:')colors.forEach(x => {  let a = Hashing(x);  console.log('\n' + a);  console.log(colors[hash.findIndex(t => t == a)]);});
 
 console.log("\n-------------------------------------------------\n");
 console.log("Шифрування та дешифрування:")
