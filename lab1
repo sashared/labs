@@ -38,32 +38,52 @@ function DivideBySyllables(a){
   let words = a.split(' ');
   words.forEach((word) => {
     ++o;
-      arr.push;
-      arr[o] = '';
+    arr.push;
+    arr[o] = '';
     for (let i = 0; i < word.length; ++i){
-      arr[o] += word[i];
-      if    ((((word[i]=='у') || (word[i]=='е') || (word[i]=='э') || (word[i]=='о') || (word[i]=='а') || (word[i]=='ы') 
-            || (word[i]=='я') || (word[i]=='и') || (word[i]=='ю') || (word[i]=='ё')) 
-         && ((word[i+1]=='у') || (word[i+1]=='е') || (word[i+1]=='э') || (word[i+1]=='о') || (word[i+1]=='а') || (word[i+1]=='ы') 
-            || (word[i+1]=='я') || (word[i+1]=='и') || (word[i+1]=='ю') || (word[i+1]=='ё')) || (i === word.length - 1))
-             // гласная | гласная
+      arr[o] += word[i];  // добавляем букву в текущий элемент масива
+      // Проверяем, является ли текущая буква границей слога.
+      
+      // гласная | гласная
+      if    ((((word[i]=='у') || (word[i]=='е') || (word[i]=='э') 
+            || (word[i]=='о') || (word[i]=='а') || (word[i]=='ы') 
+            || (word[i]=='я') || (word[i]=='и') || (word[i]=='ю') 
+            || (word[i]=='ё')) 
+         && ((word[i+1]=='у') || (word[i+1]=='е') || (word[i+1]=='э') 
+            || (word[i+1]=='о') || (word[i+1]=='а') || (word[i+1]=='ы') 
+            || (word[i+1]=='я') || (word[i+1]=='и') || (word[i+1]=='ю') 
+            || (word[i+1]=='ё')) || (i === word.length - 1))
+             
+      // гласная + согласная | согласная     
+      ||    (((word[i]!=='у') && (word[i]!=='е') && (word[i]!=='э') 
+            && (word[i]!=='о') && (word[i]!=='а') && (word[i]!=='ы') 
+            && (word[i]!=='я') && (word[i]!=='и') && (word[i]!=='ю') 
+            && (word[i]!=='ё')) 
+         && ((word[i-1]=='у') || (word[i-1]=='е') || (word[i-1]=='э') 
+            || (word[i-1]=='о') || (word[i-1]=='а') || (word[i-1]=='ы') 
+            || (word[i-1]=='я') || (word[i-1]=='и') || (word[i-1]=='ю') 
+            || (word[i-1]=='ё')) 
+         && ((word[i+1]!=='у') && (word[i+1]!=='е') && (word[i+1]!=='э') 
+            && (word[i+1]!=='о') && (word[i+1]!=='а') && (word[i+1]!=='ы') 
+            && (word[i+1]!=='я') && (word[i+1]!=='и') && (word[i+1]!=='ю') 
+            && (word[i+1]!=='ё')))          
           
-      ||    (((word[i]!=='у') && (word[i]!=='е') && (word[i]!=='э') && (word[i]!=='о') && (word[i]!=='а') && (word[i]!=='ы') 
-            && (word[i]!=='я') && (word[i]!=='и') && (word[i]!=='ю') && (word[i]!=='ё')) 
-         && ((word[i-1]=='у') || (word[i-1]=='е') || (word[i-1]=='э') || (word[i-1]=='о') || (word[i-1]=='а') || (word[i-1]=='ы') 
-            || (word[i-1]=='я') || (word[i-1]=='и') || (word[i-1]=='ю') || (word[i-1]=='ё')) 
-         && ((word[i+1]!=='у') && (word[i+1]!=='е') && (word[i+1]!=='э') && (word[i+1]!=='о') && (word[i+1]!=='а') && (word[i+1]!=='ы') 
-            && (word[i+1]!=='я') && (word[i+1]!=='и') && (word[i+1]!=='ю') && (word[i+1]!=='ё'))) 
-          // гласная + согласная | согласная 
-          
-      ||    (((word[i]=='у') || (word[i]=='е') || (word[i]=='э') || (word[i]=='о') || (word[i]=='а') || (word[i]=='ы') || (word[i]=='я') 
-            || (word[i]=='и') || (word[i]=='ю') || (word[i]=='ё'))
-         && ((word[i+1]!=='у') && (word[i+1]!=='е') && (word[i+1]!=='э') && (word[i+1]!=='о') && (word[i+1]!=='а') 
-         && (word[i+1]!=='ы') && (word[i+1]!=='я') && (word[i+1]!=='и') && (word[i+1]!=='ю') && (word[i+1]!=='ё')) 
-         && ((word[i+2]=='у') || (word[i+2]=='е') || (word[i+2]=='э') || (word[i+2]=='о') || (word[i+2]=='а') || (word[i+2]=='ы')
-            || (word[i+2]=='я') || (word[i+2]=='и') || (word[i+2]=='ю') || (word[i+2]=='ё'))))
-        // гласная | согласная + гласная 
+      // гласная | согласная + гласная     
+      ||    (((word[i]=='у') || (word[i]=='е') || (word[i]=='э') 
+            || (word[i]=='о') || (word[i]=='а') || (word[i]=='ы') 
+            || (word[i]=='я') || (word[i]=='и') || (word[i]=='ю') 
+            || (word[i]=='ё'))
+         && ((word[i+1]!=='у') && (word[i+1]!=='е') && (word[i+1]!=='э') 
+            && (word[i+1]!=='о') && (word[i+1]!=='а') && (word[i+1]!=='ы') 
+            && (word[i+1]!=='я') && (word[i+1]!=='и') && (word[i+1]!=='ю') 
+            && (word[i+1]!=='ё')) 
+         && ((word[i+2]=='у') || (word[i+2]=='е') || (word[i+2]=='э') 
+            || (word[i+2]=='о') || (word[i+2]=='а') || (word[i+2]=='ы')
+            || (word[i+2]=='я') || (word[i+2]=='и') || (word[i+2]=='ю') 
+            || (word[i+2]=='ё'))))
         {
+        // Если в данном месте должен былть слог, добавляем элемент масива
+        // и указываем, что он пустой
         ++o;
         arr.push;
         arr[o] = '';
@@ -71,11 +91,16 @@ function DivideBySyllables(a){
       } 
       else empty = false;
     }
-    let del = true;
+    let del = true; // нужно ли удалять последний слог
     if (empty) o = o - 1;
     else {
       for (let i = 0; i < arr[o].length; ++i){
-        if ((arr[o][i]=='у') || (arr[o][i]=='е') || (arr[o][i]=='э') || (arr[o][i]=='о') || (arr[o][i]=='а') || (arr[o][i]=='ы') || (arr[o][i]=='я') || (arr[o][i]=='и') || (arr[o][i]=='ю') || (arr[o][i]=='ё')) del = false;
+        // Если в последнем слоге есть гласная буква, удалять не нужно.
+        if ((arr[o][i]=='у') || (arr[o][i]=='е') || (arr[o][i]=='э') 
+           || (arr[o][i]=='о') || (arr[o][i]=='а') || (arr[o][i]=='ы') 
+           || (arr[o][i]=='я') || (arr[o][i]=='и') || (arr[o][i]=='ю') 
+           || (arr[o][i]=='ё')) 
+           del = false;
       }
       if (del){
         arr[o-1] += arr[o--];
@@ -83,6 +108,18 @@ function DivideBySyllables(a){
     }
   });
   return JSON.stringify(arr.splice(0,arr.length - 1)).replace(/(')|(")/g,'');
+}
+
+function Hashing(a){  
+  while (a.length % 4 != 0) a += ' ';  
+  a += 'соль'  let s = ['щ','у','к','а']  
+  for (let i = 0; i < 4; ++i){    
+    s[i] = s[i].charCodeAt(0);    
+    for (let j = 0; j < a.length / 4; ++j){      
+      s[i] = s[i]^a.charCodeAt(4*j+i);    
+    }  
+  }  
+  return ((s[0]<<24) + (s[1]<<16) + (s[2]<<8) + s[3])
 }
 
 function Encryption(a, key){
@@ -153,6 +190,22 @@ console.log("Масив складiв:")
 colors.forEach((x) => {
   console.log("\n" + x);
   console.log(DivideBySyllables(x));
+});
+
+console.log('\n-------------------------------------------------\n');
+console.log('Хешування:')let hash = [];
+colors.forEach(x => {  
+  let a = Hashing(x);  
+  console.log('\n' + x)  
+  console.log(a);  
+  hash.push(a);
+});
+
+console.log('\n-------------------------------------------------\n');
+console.log('Пошук по хешу:')colors.forEach(x => {  
+  let a = Hashing(x);  
+  console.log('\n' + a);  
+  console.log(colors[hash.findIndex(t => t == a)]);
 });
 
 console.log("\n-------------------------------------------------\n");
