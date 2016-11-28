@@ -196,7 +196,8 @@ colors.forEach((x) => {
 });
 
 console.log('\n-------------------------------------------------\n');
-console.log('Хешування:')let hash = [];
+console.log('Хешування:');
+let hash = [];
 colors.forEach(x => {  
   let a = Hashing(x);  
   console.log('\n' + x)  
@@ -205,7 +206,8 @@ colors.forEach(x => { 
 });
 
 console.log('\n-------------------------------------------------\n');
-console.log('Пошук по хешу:')colors.forEach(x => {  
+console.log('Пошук по хешу:');
+colors.forEach(x => {  
   let a = Hashing(x);  
   console.log('\n' + a);  
   console.log(colors[hash.findIndex(t => t == a)]);
