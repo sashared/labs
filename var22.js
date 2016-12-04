@@ -118,6 +118,7 @@ function frequencyOfSymbols2(a){
   return obj;
 }
 
+// Instead of division by dyphtongs as they don't exist in Russian
 // Function that returns the array of syllables (слогов) of the word
 // a - string written in russian language
 //
