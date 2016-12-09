@@ -6,7 +6,7 @@ console.time('Время работы программы:');
 // s - string element of the array
 //
 function filterDefis(s) {
-  if (s.search('-') === -1) return true
+  return s.search('-') === -1;
 }
 
 // Function that sorts the array 
@@ -125,18 +125,20 @@ function frequencyOfSymbols2(a){
 function divideBySyllables(a){
   let arr = [];
   let tmp;
+  let reg = /у|е|э|о|а|ы|я|и|ю|ё/i;
   a.split(/\s|-/g).forEach(word => {
     tmp = '';
     let l = word.length;
     for (let i = 0; i < l; ++i){
       tmp += word[i];
-      if ((word[i].search(/у|е|э|о|а|ы|я|и|ю|ё/i) !== -1) &&
-         !(((word[i+1] || '').search(/у|е|э|о|а|ы|я|и|ю|ё/i) === -1) &&
+      let aSearch = (word[i].search(reg) !== -1)
+      if (aSearch &&
+         !(((word[i+1] || '').search(reg) === -1) &&
          (i !== l - 1) &&
-         ((word[i+2] || '').search(/у|е|э|о|а|ы|я|и|ю|ё/i) === -1))
-      || ((word[i].search(/у|е|э|о|а|ы|я|и|ю|ё/i) === -1) &&
-         ((word[i+1] || '').search(/у|е|э|о|а|ы|я|и|ю|ё/i) === -1) &&
-         ((word[i-1] || '').search(/у|е|э|о|а|ы|я|и|ю|ё/i) !== -1))){
+         ((word[i+2] || '').search(reg) === -1))
+      || (!aSearch &&
+         ((word[i+1] || '').search(reg) === -1) &&
+         ((word[i-1] || '').search(reg) !== -1))){
         arr.push(tmp);
         tmp = '';
       }
@@ -174,17 +176,7 @@ function hashing(a){
 function hashing2(arr){  
   let hash = {};
   arr.forEach(a => {
-    let b = a;
-    while (a.length % 4 !== 0) a += ' ';  
-    a += 'соль';
-    let s = [a.charCodeAt(0), a.charCodeAt(1),
-             a.charCodeAt(2), a.charCodeAt(3)]; 
-    let l = a.length;
-    for (let i = 4; i < l; ++i){
-      let h = i%4;
-      s[h] = s[h]^a.charCodeAt(i);
-    }
-    hash[((s[0]<<24) + (s[1]<<16) + (s[2]<<8) + s[3])] = b;
+    hash[hashing(a)] = a; 
   });
   return hash;
 }
